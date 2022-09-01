@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.utils.Hooks;
+import org.example.utils.SharedDictionary;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,10 +19,18 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
-import static org.example.utils.Hooks.driver;
 import static org.hamcrest.Matchers.*;
 
 public class GoogleSteps {
+
+    private final SharedDictionary dict;
+    private WebDriver driver;
+
+    public GoogleSteps(SharedDictionary dict) {
+        this.dict = dict;
+
+        this.driver = (WebDriver)dict.readDict("driver");
+    }
 
     @Given("I am on the Google Homepage")
     public void i_am_on_the_google_homepage() {

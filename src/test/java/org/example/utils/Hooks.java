@@ -9,12 +9,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 public class Hooks {
-    public static WebDriver driver;
+    private WebDriver driver;
+
+    private final SharedDictionary dict;
+
+    public Hooks(SharedDictionary dict) {
+        this.dict = dict;
+    }
 
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        dict.addDict("driver", driver);
 
 //        WebDriverManager.firefoxdriver().setup();
 //        driver = new FirefoxDriver();
