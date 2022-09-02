@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 
@@ -21,10 +22,10 @@ public class Hooks {
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        dict.addDict("driver", driver);
 
 //        WebDriverManager.firefoxdriver().setup();
 //        driver = new FirefoxDriver();
+        dict.addDict("driver", driver);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
