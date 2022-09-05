@@ -3,6 +3,7 @@ package org.example.utils;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.restassured.RestAssured;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -18,7 +19,7 @@ public class Hooks {
         this.dict = dict;
     }
 
-    @Before
+    @Before("@GUI")
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -31,7 +32,13 @@ public class Hooks {
 
     }
 
-    @After
+    @Before("@API")
+    public void APISetup(){
+        var req = RestAssured.given().baseUri("http://localhost:2002");
+        dict.addDict("apirequest", req);
+    }
+
+    @After("@GUI")
     public void tearDown() throws InterruptedException {
         driver.quit();
     }

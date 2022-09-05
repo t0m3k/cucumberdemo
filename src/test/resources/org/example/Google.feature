@@ -1,4 +1,4 @@
-@Run
+@Run @GUI
 Feature: Google search
 # mvn test -DexcludedGroups="Ignore" -Dgroups="Run"
 # mvn test -D"cucumber.filter.tags=@Run and (not @Ignore)"
